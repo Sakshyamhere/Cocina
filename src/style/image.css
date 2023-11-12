@@ -1,0 +1,18 @@
+.img-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%; /* Ensure images don't exceed the container width */
+  }
+  
+  .img-item {
+    width: calc(33.33% - 1rem); /* 33.33% width for 3 images in a row with a 1rem margin */
+    margin-bottom: 1rem;
+  }
+  
+  /* Media query for smaller screens, e.g., mobile devices */
+  @media (max-width: 768px) {
+    .img-item {
+      width: 100%; /* 100% width for 1 image in a row on smaller screens */
+    }
+  }
