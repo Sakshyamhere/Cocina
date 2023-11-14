@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import Spinner from "./Spinner";
+import { Link } from "react-router-dom";
 
 
 function Vegeterian() {
@@ -20,10 +21,10 @@ function Vegeterian() {
 
   const getVegeterian = async () => {
     const api = await fetch(
-      `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=30&diet=Lacto-Vegetarian`
+      `https://api.spoonacular.com/recipies/random?apiKey=${apiKey}&number=30&diet=Lacto-Vegetarian`
     );
     const data = await api.json();
-    setVegeterian(data.recipes);
+    setVegeterian(data.recipies);
     setloading(false)
   };
 
@@ -42,12 +43,13 @@ function Vegeterian() {
             gap: "2rem",
           }}
         >
-          {Vegeterian.map((recipe) => {
+          {Vegeterian.map((recipie) => {
             return (
-              <SplideSlide key={recipe.id}>
+              <SplideSlide key={recipie.id}>
                 <Card>
-                  <img src={recipe.image ? recipe.image : "https://shmector.com/_ph/18/412122157.png"} alt={recipe.title}  />
-                  
+                  <Link to={"recipie/" + recipie.id}>
+                  <img src={recipie.image ? recipie.image : "https://shmector.com/_ph/18/412122157.png"} alt={recipie.title}  />
+                  </Link>
                 </Card>
               </SplideSlide>
             )

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import Spinner from "./Spinner";
+import { Link } from "react-router-dom";
 
 function Popular() {
   const [popular, setPopular] = useState([]);
@@ -41,11 +42,13 @@ function Popular() {
             gap: "3rem",
           }}
         >
-          {popular.map((recipe) => {
+          {popular.map((recipie) => {
             return (
-              <SplideSlide key={recipe.id}>
+              <SplideSlide key={recipie.id}>
                 <Card>
-                  <img src={recipe.image ? recipe.image : "https://shmector.com/_ph/18/412122157.png"} alt={recipe.title}  />
+                <Link to={"recipie/" + recipie.id}>
+                  <img src={recipie.image ? recipie.image : "https://shmector.com/_ph/18/412122157.png"} alt={recipie.title}  />
+                  </Link>
                 </Card>
               </SplideSlide>
             )

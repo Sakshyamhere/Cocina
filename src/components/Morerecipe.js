@@ -3,6 +3,7 @@ import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "./Spinner";
 import "../style/image.css";
+import { Link } from "react-router-dom";
 
 function Morerecipe() {
   const [moreRecipie, setMorerecipe] = useState([]);
@@ -46,12 +47,13 @@ function Morerecipe() {
         }
       >
         <div className="container">
-          <Heading>Others</Heading>
+          <Heading>OTHERS</Heading>
           <div className="row">
            
             <div className="img-container">
               {moreRecipie.map((recipie) => (
                 <div className="img-item" key={recipie.id}>
+                  <Link to={"recipie/" + recipie.id}>
                   <img
                     src={
                       recipie.image
@@ -65,6 +67,7 @@ function Morerecipe() {
                       borderRadius: "3rem",
                     }}
                   />
+                  </Link>
                 </div>
               ))}
             </div>
