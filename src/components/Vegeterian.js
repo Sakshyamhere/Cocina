@@ -9,11 +9,7 @@ import { Link } from "react-router-dom";
 function Vegeterian() {
   const [Vegeterian, setVegeterian] = useState([]);
   const [loading, setloading] = useState(true)
-  const apiKey = "e8df2698559547e3b012c17a67bfa0fa";
-
-
-
-
+  const apiKey = "19c06f1f942c41bcaf6be5abedf29be2";
 
   useEffect(() => {
     getVegeterian();
@@ -21,10 +17,10 @@ function Vegeterian() {
 
   const getVegeterian = async () => {
     const api = await fetch(
-      `https://api.spoonacular.com/recipies/random?apiKey=${apiKey}&number=30&diet=Lacto-Vegetarian`
+      `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=30`
     );
     const data = await api.json();
-    setVegeterian(data.recipies);
+    setVegeterian(data.recipes);
     setloading(false)
   };
 
@@ -43,13 +39,15 @@ function Vegeterian() {
             gap: "2rem",
           }}
         >
-          {Vegeterian.map((recipie) => {
+          
+          {Vegeterian.map((recipe) => {
             return (
-              <SplideSlide key={recipie.id}>
+              <SplideSlide key={recipe.id}>
                 <Card>
-                  <Link to={"recipie/" + recipie.id}>
-                  <img src={recipie.image ? recipie.image : "https://shmector.com/_ph/18/412122157.png"} alt={recipie.title}  />
+                  <Link to={"rid/" + recipe.id}>
+                  <img src={recipe.image ? recipe.image : "https://shmector.com/_ph/18/412122157.png"} alt={recipe.title}  />
                   </Link>
+                  <p className="text-center">{recipe.title}</p>
                 </Card>
               </SplideSlide>
             )

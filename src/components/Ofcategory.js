@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 
-function Searched() {
-  const [search, setsearch] = useState({results : []})
-  const apiKey = "19c06f1f942c41bcaf6be5abedf29be2";
-  const params = useParams();
-
-
-  useEffect(() => {
-    getsearch(params.search);
-  }, [params.search]);
-
-  const getsearch = async (searchParam) => {
-    const api = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchParam}`
-    );
-    const data = await api.json();
-    console.log(data)
-    setsearch(data);
-  };
-
+function Ofcategory() {
+    const [ofCategory, setofCategory] = useState([]);
+    const params = useParams()
+    const apiKey = "19c06f1f942c41bcaf6be5abedf29be2";
+  
+    useEffect(() => {
+      getofCategory(params.category);
+    }, [params.category]);
+  
+    const getofCategory = async (cuisine) => {
+    
+      const api = await fetch(
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&cuisine=${cuisine}`
+      );
+      const data = await api.json();
+      const newRecipes = data.results;
+      setofCategory(newRecipes);
+     
+  
+      
+    };
   return (
-  <div className='container'>
+    <div>
+          <div className='container'>
        <div className="row">
            
            <div className="img-container">
       {
-        search.results.map((results) => 
+        ofCategory.map((results) => 
         (
           <div className="img-item" key={results.id}>
           <Link to={"/rid/" + results.id}>
@@ -53,8 +56,8 @@ function Searched() {
       </div>
       </div>
       </div>
-    
+    </div>
   )
 }
 
-export default Searched
+export default Ofcategory

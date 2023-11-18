@@ -6,18 +6,16 @@ import "../style/image.css";
 import { Link } from "react-router-dom";
 
 function Morerecipe() {
-  const [moreRecipie, setMorerecipe] = useState([]);
+  const [morerecipe, setMorerecipe] = useState([]);
 
-  const apiKey = "e8df2698559547e3b012c17a67bfa0fa";
+  const apiKey = "19c06f1f942c41bcaf6be5abedf29be2";
 
   useEffect(() => {
     getMorerecipe();
   }, []);
 
   const getMorerecipe = async () => {
-    // if (moreRecipie.length > 30){
-    //   return false;
-    // }
+  
     const api = await fetch(
       `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=12`
     );
@@ -25,7 +23,7 @@ function Morerecipe() {
     const newRecipes = data.recipes;
     
     if (newRecipes.length > 2) {
-      setMorerecipe(moreRecipie.concat(newRecipes));
+      setMorerecipe(morerecipe.concat(newRecipes));
     } 
 
     
@@ -35,9 +33,9 @@ function Morerecipe() {
     <>
       <InfiniteScroll
         style={{ overflow: "hidden" }}
-        dataLength={moreRecipie.length} 
+        dataLength={morerecipe.length} 
         next={getMorerecipe}
-        hasMore={moreRecipie.length <300}
+        hasMore={morerecipe.length <300}
         loader={
           <div className="container">
             <h1>
@@ -51,23 +49,25 @@ function Morerecipe() {
           <div className="row">
            
             <div className="img-container">
-              {moreRecipie.map((recipie) => (
-                <div className="img-item" key={recipie.id}>
-                  <Link to={"recipie/" + recipie.id}>
+              {morerecipe.map((recipe) => (
+                <div className="img-item" key={recipe.id}>
+                  <Link to={"rid/" + recipe.id}>
                   <img
                     src={
-                      recipie.image
-                        ? recipie.image
+                      recipe.image
+                        ? recipe.image
                         : "https://shmector.com/_ph/18/412122157.png"
                     }
-                    alt={recipie.title}
+                    alt={recipe.title}
                     style={{
                       height: "20rem",
+                      width : '25rem',
                       padding: "2rem",
                       borderRadius: "3rem",
                     }}
                   />
                   </Link>
+                  <p className="text-center">{recipe.title}</p>
                 </div>
               ))}
             </div>

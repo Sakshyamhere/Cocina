@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function Popular() {
   const [popular, setPopular] = useState([]);
   const [loading, setloading] = useState(true)
-  const apiKey = "e8df2698559547e3b012c17a67bfa0fa";
+  const apiKey = "19c06f1f942c41bcaf6be5abedf29be2";
 
 
 
@@ -42,13 +42,14 @@ function Popular() {
             gap: "3rem",
           }}
         >
-          {popular.map((recipie) => {
+          {popular.map((recipe) => {
             return (
-              <SplideSlide key={recipie.id}>
+              <SplideSlide key={recipe.id}>
                 <Card>
-                <Link to={"recipie/" + recipie.id}>
-                  <img src={recipie.image ? recipie.image : "https://shmector.com/_ph/18/412122157.png"} alt={recipie.title}  />
+                <Link to={"rid/" + recipe.id}>
+                  <img src={recipe.image ? recipe.image : "https://shmector.com/_ph/18/412122157.png"} alt={recipe.title}  />
                   </Link>
+                  <p className="text-center">{recipe.title}</p>
                 </Card>
               </SplideSlide>
             )
